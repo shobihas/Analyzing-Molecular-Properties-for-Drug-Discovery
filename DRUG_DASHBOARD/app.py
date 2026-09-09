@@ -1019,4 +1019,3 @@ st.markdown("---")
 st.caption(
     "Built with Python • Streamlit • RDKit • Pandas • Plotly"
 )
-```
