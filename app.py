@@ -10,7 +10,7 @@ from PIL import Image
 from rdkit import Chem
 from rdkit.Chem import Descriptors, Crippen, Lipinski
 from rdkit.Chem import rdMolDescriptors
-from rdkit.Chem.Draw import rdMolDraw2D
+from rdkit.Chem import Draw
 
 import plotly.express as px
 import plotly.graph_objects as go
@@ -39,7 +39,7 @@ st.set_page_config(
 # Analyzing-Molecular-Properties-for-Drug-Discovery/
 #
 # App:
-# DRUG_DASHBOARD/app.py
+# app.py
 #
 # Dataset:
 # DRUG_DASHBOARD/data/molecules.csv
@@ -163,24 +163,10 @@ def draw_molecule_image(mol, size=(500, 350)):
         return None
 
     try:
-        drawer = rdMolDraw2D.MolDraw2DCairo(
-            size[0],
-            size[1]
+        return Draw.MolToImage(
+            mol,
+            size=size
         )
-
-        rdMolDraw2D.PrepareAndDrawMolecule(
-            drawer,
-            mol
-        )
-
-        drawer.FinishDrawing()
-
-        png = drawer.GetDrawingText()
-
-        return Image.open(
-            io.BytesIO(png)
-        )
-
     except Exception:
         return None
 
